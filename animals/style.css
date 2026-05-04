@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background-color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+}
+
+nav {
+    text-align: center;
+    background-color: lightgreen;
+    padding: 10px;
+    border-top: 2px darkblue solid;
+    border-bottom: 2px darkblue solid;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav li {
+    display: inline;
+}
+
+nav a {
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+nav a:link,
+nav a:visited {
+    color: purple;
+}
+
+nav a:hover {
+    color: orange;
+}
+
+nav a:active {
+    color: red;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: green;
+    font-size: 3em;
+}
+
+h2 {
+    color: darkgreen;
+    font-size: 3em;
+    background-color: lightgreen;
+    border: 2px solid green;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+a:link,
+a:visited {
+    color: #b300b3;
+}
+
+a:hover,
+a:active {
+    color: blue;
+}
+
+footer {
+    background-color: lightgreen;
+    border-top: purple 2px solid;
+    text-align: center;
+}
+
+.gallery .preview {
+    width: 100%;
+    height: auto;
+}
+
+.gallery .preview img#preview {
+    padding: 1px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto !important;
+    display: block !important;
+}
+
+.gallery .gallery-thumbnails img {
+    width: 100px;
+    height: 75px;
+    margin: 3px 10px 10px 0;
+    padding: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.25);
+    border-radius: 6px;
+}
+
+.gallery .gallery-thumbnails img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+main .fa {
+    font-size: 5em;
+    color: green;
+}
+
+footer .fa {
+    font-size: 2em;
+    color: green;
+}
+
+.hero-image {
+    border: 4px solid #000000;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px #000000;
+}
+
+@media only screen and (max-width: 1024px) {
+    h1 {
+        font-size: 2em;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;
+    }
+}
