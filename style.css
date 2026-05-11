@@ -7,7 +7,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-
 header {
     text-align: center;
     padding: 20px;
@@ -60,6 +59,7 @@ nav a:hover {
     color: beige;
     text-shadow: 2px 2px 4px black;
 }
+
 h2 {
     background-color: seagreen;
     padding: 10px;
@@ -95,13 +95,12 @@ canvas {
     color: white;
 }
 
-
 .resume-page {
     background-color: #e9e2d0;
 }
 
 .resume-page main {
-    max-width: 500px;   /* ~5 inches readable width */
+    max-width: 500px;
     margin: 40px auto;
     padding: 40px;
     background-color: white;
@@ -121,7 +120,6 @@ canvas {
     max-width: 100%;
     flex: 100%;
 }
-
 
 footer {
     background-color: seagreen;
@@ -152,31 +150,6 @@ footer small {
     color: beige;
 }
 
-@media only screen and (max-width: 1024px) {
-    h1 {
-        font-size: 2em;
-    }
-
-    .resume-page main {
-        padding: 25px;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    h1 {
-        font-size: 1.5em;
-    }
-
-    nav li {
-        display: block;
-        padding: 10px 0;
-    }
-
-    .resume-page main {
-        width: 90%;
-        padding: 20px;
-    }
-}
 .profile-img {
     width: 140px;
     height: 140px;
@@ -195,4 +168,36 @@ footer small {
     padding: 8px;
     background-color: white;
     border-radius: 4px;
+}
+
+/* Tablet screen adjustments */
+@media only screen and (max-width: 1024px) {
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .resume-page main {
+        padding: 25px;
+    }
+
+}
+
+/* Mobile screen adjustments */
+@media only screen and (max-width: 768px) {
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    nav li {
+        display: block;
+        padding: 10px 0;
+    }
+
+    .resume-page main {
+        width: 90%;
+        padding: 20px;
+    }
+
 }

@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Game | Bisham Phudong Portfolio</title>
+    <title>Game</title>
 
+    <!-- External Bootstrap and Font Awesome libraries -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="style.css">
 
     <style>
+
+        /* Canvas styling for the game display */
         canvas {
             border: 2px solid darkgreen;
             display: block;
@@ -39,259 +46,398 @@
             color: white;
         }
 
-        .mobile { display: none; }
+        .mobile {
+            display: none;
+        }
 
+        /* Mobile layout adjustments */
         @media only screen and (max-width: 768px) {
-            .desktop { display: none; }
+
+            .desktop {
+                display: none;
+            }
+
             .mobile {
                 display: block;
                 touch-action: manipulation;
             }
+
         }
 
-        /* ✅ CENTERED DESCRIPTION BOX */
+        /* Centers the game description content */
         .game-description {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             text-align: center;
         }
+
     </style>
+
 </head>
 
 <body onload="startGame()">
 
-<header>
-    <img height="100" width="400" src="images/logo.png" alt="Logo">
-</header>
+    <header>
 
-<nav>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="game.html">Game</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-    </ul>
-</nav>
+        <img height="100" width="400" src="images/logo.png" alt="Logo">
 
-<main>
+    </header>
 
-<h2>JavaScript Flappy Bird Game</h2>
+    <!-- Navigation menu -->
+    <nav>
 
-<!-- ✅ CENTERED DESCRIPTION -->
-<div class="game-description">
+        <ul>
 
-    <p>
-        This game is a modified version of a Flappy Bird-style JavaScript game created using the W3Schools game tutorial. I customized the original project by adding a background image, scoring system, and improved styling to make it more visually appealing and interactive.
-    </p>
+            <li><a href="index.html">Home</a></li>
 
-    <p>
-        The game is built using HTML5 Canvas and JavaScript and demonstrates important programming concepts such as animation loops, gravity, collision detection, and user input handling for both desktop and mobile devices.
-    </p>
+            <li><a href="resume.html">Resume</a></li>
 
-    <p>
-        You can view the original tutorial here:
-        <a href="https://www.w3schools.com/graphics/game_intro.asp" target="_blank">
-            W3Schools JavaScript Game Tutorial
-        </a>
-    </p>
+            <li><a href="game.html">Game</a></li>
 
-</div>
+            <li><a href="portfolio.html">Portfolio</a></li>
 
-<!-- GAME AREA -->
-<div id="game"></div>
+        </ul>
 
-<!-- DESKTOP CONTROLS -->
-<div class="game-controls desktop">
-    <button class="myButton"
-        onmousedown="accelerate(-0.2)"
-        onmouseup="accelerate(0.05)">
-        FLAP WINGS
-    </button>
+    </nav>
 
-    <button class="myButton" onclick="location.reload()">
-        PLAY AGAIN
-    </button>
-</div>
+    <main>
 
-<!-- MOBILE CONTROLS -->
-<div class="game-controls mobile">
-    <button class="myButton"
-        ontouchstart="accelerate(-0.2)"
-        ontouchend="accelerate(0.05)">
-        FLAP WINGS
-    </button>
+        <h2>JavaScript Flappy Bird Game</h2>
 
-    <button class="myButton" onclick="location.reload()">
-        PLAY AGAIN
-    </button>
-</div>
+        <!-- Game description section -->
+        <div class="game-description">
 
-<script>
-var myGamePiece;
-var myObstacles = [];
-var myScore;
+            <p>
+                This game is a modified version of a Flappy Bird-style JavaScript game created using the W3Schools game tutorial. I customized the original project by adding a background image, scoring system, and improved styling to make it more visually appealing and interactive.
+            </p>
 
-var bgImage = new Image();
-bgImage.src = "images/background.jpg";
+            <p>
+                The game is built using HTML5 Canvas and JavaScript and demonstrates important programming concepts such as animation loops, gravity, collision detection, and user input handling for both desktop and mobile devices.
+            </p>
 
-var canvasWidth = 640;
-var canvasHeight = 360;
+            <p>
+                You can view the original tutorial here:
 
-if (window.innerWidth < 768) {
-    canvasWidth = 300;
-    canvasHeight = 300;
-}
-
-function startGame() {
-    myGamePiece = new component(20, 20, "red", 10, 120);
-    myGamePiece.gravity = 0.05;
-    myScore = new component("20px", "Consolas", "white", 10, 30, "text");
-    myGameArea.start();
-}
-
-var myGameArea = {
-    canvas: document.createElement("canvas"),
-
-    start: function () {
-        this.canvas.width = canvasWidth;
-        this.canvas.height = canvasHeight;
-
-        this.context = this.canvas.getContext("2d");
-        document.getElementById("game").appendChild(this.canvas);
-
-        this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20);
-    },
-
-    clear: function () {
-        this.context.drawImage(bgImage, 0, 0, this.canvas.width, this.canvas.height);
-    }
-}
-
-function component(width, height, color, x, y, type) {
-    this.type = type;
-    this.width = width;
-    this.height = height;
-    this.x = x;
-    this.y = y;
-    this.gravity = 0;
-    this.gravitySpeed = 0;
-
-    this.update = function () {
-        var ctx = myGameArea.context;
-
-        if (this.type == "text") {
-            ctx.font = this.width + " " + this.height;
-            ctx.fillStyle = color;
-            ctx.fillText(this.text, this.x, this.y);
-        } else {
-            ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-        }
-    }
-
-    this.newPos = function () {
-        this.gravitySpeed += this.gravity;
-        this.y += this.gravitySpeed;
-        this.hitBottom();
-    }
-
-    this.hitBottom = function () {
-        var bottom = myGameArea.canvas.height - this.height;
-        if (this.y > bottom) {
-            this.y = bottom;
-            this.gravitySpeed = 0;
-        }
-    }
-
-    this.crashWith = function (other) {
-        return !(
-            this.y + this.height < other.y ||
-            this.y > other.y + other.height ||
-            this.x + this.width < other.x ||
-            this.x > other.x + other.width
-        );
-    }
-}
-
-function updateGameArea() {
-
-    for (let i = 0; i < myObstacles.length; i++) {
-        if (myGamePiece.crashWith(myObstacles[i])) {
-            return;
-        }
-    }
-
-    myGameArea.clear();
-    myGameArea.frameNo++;
-
-    if (myGameArea.frameNo == 1 || everyinterval(150)) {
-        let x = myGameArea.canvas.width;
-        let height = Math.floor(Math.random() * 180 + 20);
-        let gap = Math.floor(Math.random() * 150 + 50);
-
-        myObstacles.push(new component(20, height, "gray", x, 0));
-        myObstacles.push(new component(20, canvasHeight - height - gap, "gray", x, height + gap));
-    }
-
-    for (let i = 0; i < myObstacles.length; i++) {
-        myObstacles[i].x -= 1;
-        myObstacles[i].update();
-    }
-
-    myScore.text = "Score: " + myGameArea.frameNo;
-    myScore.update();
-
-    myGamePiece.newPos();
-    myGamePiece.update();
-}
-
-function everyinterval(n) {
-    return (myGameArea.frameNo / n) % 1 == 0;
-}
-
-function accelerate(n) {
-    myGamePiece.gravity = n;
-}
-</script>
-
-</main>
-
-<footer>
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-sm-3 text-center">
-                <i class="fa fa-envelope"></i><br>
-                <a href="mailto:bishamphudong6@gmail.com">Email me</a>
-            </div>
-
-            <div class="col-sm-3 text-center">
-                <i class="fa fa-facebook-official"></i><br>
-                <a href="https://www.facebook.com/bisham.phudong" target="_blank">
-                    Follow me on Facebook
+                <a href="https://www.w3schools.com/graphics/game_intro.asp" target="_blank">
+                    W3Schools JavaScript Game Tutorial
                 </a>
-            </div>
 
-            <div class="col-sm-3 text-center">
-                <i class="fa fa-phone-square"></i><br>
-                <a href="tel:7633468471">Call me</a>
-            </div>
-
-            <div class="col-sm-3 text-center">
-                <i class="fa fa-instagram"></i><br>
-                <a href="https://www.instagram.com/bisham_phudong" target="_blank">
-                    Follow me on Instagram
-                </a>
-            </div>
+            </p>
 
         </div>
 
-        <br>
-        <small>&copy; 2026 Bisham Phudong. All rights reserved.</small>
-    </div>
-</footer>
+        <!-- Game canvas container -->
+        <div id="game"></div>
+
+        <!-- Desktop game controls -->
+        <div class="game-controls desktop">
+
+            <button class="myButton"
+                onmousedown="accelerate(-0.2)"
+                onmouseup="accelerate(0.05)">
+
+                FLAP WINGS
+
+            </button>
+
+            <button class="myButton" onclick="location.reload()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </div>
+
+        <!-- Mobile game controls -->
+        <div class="game-controls mobile">
+
+            <button class="myButton"
+                ontouchstart="accelerate(-0.2)"
+                ontouchend="accelerate(0.05)">
+
+                FLAP WINGS
+
+            </button>
+
+            <button class="myButton" onclick="location.reload()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </div>
+
+        <script>
+
+            // Main game variables
+            var myGamePiece;
+            var myObstacles = [];
+            var myScore;
+
+            var bgImage = new Image();
+            bgImage.src = "images/background.jpg";
+
+            var canvasWidth = 640;
+            var canvasHeight = 360;
+
+            // Resize canvas for mobile screens
+            if (window.innerWidth < 768) {
+
+                canvasWidth = 300;
+                canvasHeight = 300;
+
+            }
+
+            function startGame() {
+
+                myGamePiece = new component(20, 20, "red", 10, 120);
+
+                myGamePiece.gravity = 0.05;
+
+                myScore = new component("20px", "Consolas", "white", 10, 30, "text");
+
+                myGameArea.start();
+
+            }
+
+            var myGameArea = {
+
+                canvas: document.createElement("canvas"),
+
+                start: function () {
+
+                    this.canvas.width = canvasWidth;
+
+                    this.canvas.height = canvasHeight;
+
+                    this.context = this.canvas.getContext("2d");
+
+                    document.getElementById("game").appendChild(this.canvas);
+
+                    this.frameNo = 0;
+
+                    this.interval = setInterval(updateGameArea, 20);
+
+                },
+
+                clear: function () {
+
+                    this.context.drawImage(
+                        bgImage,
+                        0,
+                        0,
+                        this.canvas.width,
+                        this.canvas.height
+                    );
+
+                }
+
+            }
+
+            // Creates game objects such as player, obstacles, and text
+            function component(width, height, color, x, y, type) {
+
+                this.type = type;
+                this.width = width;
+                this.height = height;
+                this.x = x;
+                this.y = y;
+                this.gravity = 0;
+                this.gravitySpeed = 0;
+
+                this.update = function () {
+
+                    var ctx = myGameArea.context;
+
+                    if (this.type == "text") {
+
+                        ctx.font = this.width + " " + this.height;
+
+                        ctx.fillStyle = color;
+
+                        ctx.fillText(this.text, this.x, this.y);
+
+                    } else {
+
+                        ctx.fillStyle = color;
+
+                        ctx.fillRect(this.x, this.y, this.width, this.height);
+
+                    }
+
+                }
+
+                this.newPos = function () {
+
+                    this.gravitySpeed += this.gravity;
+
+                    this.y += this.gravitySpeed;
+
+                    this.hitBottom();
+
+                }
+
+                this.hitBottom = function () {
+
+                    var bottom = myGameArea.canvas.height - this.height;
+
+                    if (this.y > bottom) {
+
+                        this.y = bottom;
+
+                        this.gravitySpeed = 0;
+
+                    }
+
+                }
+
+                this.crashWith = function (other) {
+
+                    return !(
+
+                        this.y + this.height < other.y ||
+                        this.y > other.y + other.height ||
+                        this.x + this.width < other.x ||
+                        this.x > other.x + other.width
+
+                    );
+
+                }
+
+            }
+
+            // Updates the game continuously
+            function updateGameArea() {
+
+                for (let i = 0; i < myObstacles.length; i++) {
+
+                    if (myGamePiece.crashWith(myObstacles[i])) {
+
+                        return;
+
+                    }
+
+                }
+
+                myGameArea.clear();
+
+                myGameArea.frameNo++;
+
+                if (myGameArea.frameNo == 1 || everyinterval(150)) {
+
+                    let x = myGameArea.canvas.width;
+
+                    let height = Math.floor(Math.random() * 180 + 20);
+
+                    let gap = Math.floor(Math.random() * 150 + 50);
+
+                    myObstacles.push(
+                        new component(20, height, "gray", x, 0)
+                    );
+
+                    myObstacles.push(
+                        new component(
+                            20,
+                            canvasHeight - height - gap,
+                            "gray",
+                            x,
+                            height + gap
+                        )
+                    );
+
+                }
+
+                for (let i = 0; i < myObstacles.length; i++) {
+
+                    myObstacles[i].x -= 1;
+
+                    myObstacles[i].update();
+
+                }
+
+                myScore.text = "Score: " + myGameArea.frameNo;
+
+                myScore.update();
+
+                myGamePiece.newPos();
+
+                myGamePiece.update();
+
+            }
+
+            function everyinterval(n) {
+
+                return (myGameArea.frameNo / n) % 1 == 0;
+
+            }
+
+            // Controls player movement
+            function accelerate(n) {
+
+                myGamePiece.gravity = n;
+
+            }
+
+        </script>
+
+    </main>
+
+    <!-- Footer with contact information -->
+    <footer>
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-sm-3 text-center">
+
+                    <i class="fa fa-envelope"></i><br>
+
+                    <a href="mailto:bishamphudong6@gmail.com">Email me</a>
+
+                </div>
+
+                <div class="col-sm-3 text-center">
+
+                    <i class="fa fa-facebook-official"></i><br>
+
+                    <a href="https://www.facebook.com/bisham.phudong" target="_blank">
+                        Follow me on Facebook
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3 text-center">
+
+                    <i class="fa fa-phone-square"></i><br>
+
+                    <a href="tel:7633468471">Call me</a>
+
+                </div>
+
+                <div class="col-sm-3 text-center">
+
+                    <i class="fa fa-instagram"></i><br>
+
+                    <a href="https://www.instagram.com/bisham_phudong" target="_blank">
+                        Follow me on Instagram
+                    </a>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <small>
+                &copy; 2026 Bisham Phudong. All rights reserved.
+            </small>
+
+        </div>
+
+    </footer>
 
 </body>
+
 </html>
